@@ -33,6 +33,7 @@ function sendScrollMessage(messageType) {
 }
 
 var ws = null;
+openConnection();
 
 function closeConnection() {
     if (ws)
@@ -41,7 +42,7 @@ function closeConnection() {
 
 function openConnection() {
     closeConnection();
-    var url = "ws://localhost:9002";
+    var url = "ws://localhost:9001";
     ws = new WebSocket(url);
     ws.onopen = onOpen;
     ws.onclose = onClose;
@@ -59,9 +60,10 @@ function onClose() {
 }
 
 function onMessage(event) {
+	console.log(event);
     route(event.data);
 }
 
 function onError(event) {
-    alert(event.data);
+    alert(JSON.stringify(event));
 }
