@@ -2,7 +2,7 @@
     "manifest_version": 2,
 
     "name": "CommandPlus",
-    "version": "1.0.14",
+    "version": "1.0.16",
 
     "background": {
         "scripts": ["background.js"],
@@ -16,7 +16,7 @@
 
     "content_scripts": [{
         "matches": ["http://*/*", "https://*/*"],
-        "js": ["jquery/jquery.min.js", "content.js"]
+        "js": ["jquery/jquery.min.js", "content-script.js"]
     }],
 
     "permissions": ["tabs", "<all_urls>"]
