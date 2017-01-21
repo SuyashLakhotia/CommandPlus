@@ -65,5 +65,5 @@ function onMessage(event) {
 }
 
 function onError(event) {
-    alert(JSON.stringify(event));
+    alert("Websocket error.");
 }
