@@ -31,3 +31,37 @@ function sendScrollMessage(messageType) {
         chrome.tabs.sendMessage(tab.id, { type: messageType });
     });
 }
+
+var ws = null;
+
+function closeConnection() {
+    if (ws)
+        ws.close();
+}
+
+function openConnection() {
+    closeConnection();
+    var url = "ws://localhost:9002";
+    ws = new WebSocket(url);
+    ws.onopen = onOpen;
+    ws.onclose = onClose;
+    ws.onmessage = onMessage;
+    ws.onerror = onError;
+}
+
+function onOpen() {
+    console.log("Websocket connected.");
+}
+
+function onClose() {
+    console.log("Websocket disconnected.");
+    ws = null;
+}
+
+function onMessage(event) {
+    route(event.data);
+}
+
+function onError(event) {
+    alert(event.data);
+}
