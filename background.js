@@ -4,36 +4,39 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
     //     return true;
     // }
 
-    route(request.type);
+    routeMessage(request.type);
     return true;
 });
 
-function route(msg) {
-    switch (msg) {
-        case "scroll-down":
-        case "scroll-up":
-            sendScrollMessage(msg);
-            break;
+function routeMessage(messageType) {
+    switch (messageType) {
         case "zoom-in":
-            chrome.tabs.getSelected(null, function(tab) {
-                chrome.tabs.getZoom(tab.id, function(zoomFactor) {
-                    chrome.tabs.setZoom(tab.id, zoomFactor + 0.2);
-                });
-            });
+            zoomIn();
             break;
         case "zoom-out":
+            zoomOut();
+            break;
+        default:
             chrome.tabs.getSelected(null, function(tab) {
-                chrome.tabs.getZoom(tab.id, function(zoomFactor) {
-                    chrome.tabs.setZoom(tab.id, zoomFactor - 0.2);
-                });
+                chrome.tabs.sendMessage(tab.id, { type: messageType, tabID: tab.id });
             });
             break;
     }
 }
 
-function sendScrollMessage(messageType) {
+function zoomIn() {
     chrome.tabs.getSelected(null, function(tab) {
-        chrome.tabs.sendMessage(tab.id, { type: messageType });
+        chrome.tabs.getZoom(tab.id, function(zoomFactor) {
+            chrome.tabs.setZoom(tab.id, zoomFactor + 0.2);
+        });
+    });
+}
+
+function zoomOut() {
+    chrome.tabs.getSelected(null, function(tab) {
+        chrome.tabs.getZoom(tab.id, function(zoomFactor) {
+            chrome.tabs.setZoom(tab.id, zoomFactor - 0.2);
+        });
     });
 }
 
