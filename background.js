@@ -69,14 +69,14 @@ function onClose() {
 
 function onMessage(event) {
     console.log(event);
-    route(event.data);
+    routeMessage(event.data);
 }
 
 function onError(event) {
     alert("Websocket error.");
 }
 
-// function sendSnapshot(snapshot) {
+// function sendSnapshotToServer(snapshot) {
 //     if (ws)
 //         ws.send(snapshot);
 // }

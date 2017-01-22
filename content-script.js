@@ -71,7 +71,7 @@ function startSnapshotting() {
 
 function sendSnapshot() {
     ctx.drawImage(video, 0, 0, 300, 240);
-    var data = canvas.toDataURL('image/jpeg', 1.0);
+    var data = canvas.toDataURL('image/png');
     chrome.extension.sendMessage({
         type: "snapshot",
         payload: data
