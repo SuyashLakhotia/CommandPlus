@@ -1,4 +1,9 @@
 chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
+    // if (request.type == "snapshot") {
+    //     sendSnapshotToServer(request.payload);
+    //     return true;
+    // }
+
     route(request.type);
     return true;
 });
@@ -60,10 +65,15 @@ function onClose() {
 }
 
 function onMessage(event) {
-	console.log(event);
+    console.log(event);
     route(event.data);
 }
 
 function onError(event) {
     alert("Websocket error.");
 }
+
+// function sendSnapshot(snapshot) {
+//     if (ws)
+//         ws.send(snapshot);
+// }
