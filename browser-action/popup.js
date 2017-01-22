@@ -1,4 +1,16 @@
 window.onload = function() {
+    document.getElementById("openWSBtn").onclick = function() {
+        chrome.extension.sendMessage({
+            type: "openWS"
+        });
+    }
+
+    document.getElementById("closeWSBtn").onclick = function() {
+        chrome.extension.sendMessage({
+            type: "closeWS"
+        });
+    }
+
     document.getElementById("scrollDownBtn").onclick = function() {
         chrome.extension.sendMessage({
             type: "scroll-down"

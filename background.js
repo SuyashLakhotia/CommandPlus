@@ -10,6 +10,12 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 
 function routeMessage(messageType) {
     switch (messageType) {
+        case "openWS":
+            openConnection();
+            break;
+        case "closeWS":
+            closeConnection();
+            break;
         case "zoom-in":
             zoomIn();
             break;
@@ -41,7 +47,6 @@ function zoomOut() {
 }
 
 var ws = null;
-openConnection();
 
 function closeConnection() {
     if (ws)
